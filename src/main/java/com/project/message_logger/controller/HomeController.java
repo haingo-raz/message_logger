@@ -1,4 +1,5 @@
-package com.project.message_logger;
+package com.project.message_logger.controller;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Messages</title>
+    <link rel="stylesheet" href="cards.css">
+</head>
+<body>
+    <div class="top-bar">
+        <a href="index.html">⬅ Back to Send Message</a>
+    </div>
+
+    <div class="container">
+        <h1>All Messages</h1>
+        <div id="messagesGrid" class="messages-grid"></div>
+    </div>
+
+    <script>
+        async function loadMessages() {
+            try {
+                const response = await fetch('/messages');
+                const messages = await response.json();
+
+                const grid = document.getElementById('messagesGrid');
+                grid.innerHTML = "";
+
+                messages.forEach(msg => {
+                    const card = document.createElement('div');
+                    card.className = 'message-card';
+                    card.innerHTML = `
+                        <strong>${msg.sender}</strong>
+                        <p>${msg.text}</p>
+                    `;
+                    grid.appendChild(card);
+                });
+            } catch (err) {
+                console.error("Failed to load messages", err);
+            }
+        }
+
+        window.onload = loadMessages;
+    </script>
+</body>
+</html>
